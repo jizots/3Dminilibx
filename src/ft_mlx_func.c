@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 09:22:29 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/26 17:20:24 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/10 15:03:53 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_mlx_keypush(int keycode, void *param)
 		return (ft_mlx_close_win(meta->img));
 	else if (keycode == KEY_PLUS)
 	{
-		meta->interval = meta->interval * 1.1;
+		meta->interval = meta->interval * 1.1111;
 		ft_resize(meta, 0, 0, 1.1);
 		ft_mlx_image_clear(meta);
 		ft_draw(meta, meta->img);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_map.c                                       :+:      :+:    :+:   */
+/*   fdf_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -97,11 +97,11 @@ static int	ft_get_line(int fd, t_meta *meta)
 	return (EXIT_SUCCESS);
 }
 
-t_map	**ft_get_map(char *filename, t_meta *meta)
+t_map	**fdf_get_map(char *filename, t_meta *meta)
 {
 	int		fd;
 
-	if (ft_make_mapbase(filename, meta) != 0)
+	if (fdf_make_empty_map(filename, meta) != 0)
 		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_map2.c                                      :+:      :+:    :+:   */
+/*   fdf_get_map2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -79,30 +79,31 @@ int	ft_count_line(int fd, char *filename)
 	return (count + 1);
 }
 
-t_map	**ft_allocate_map(t_meta *meta)
+t_map	**ft_allocate_map(int xsize, int ysize)
 {
-	int	i;
+	t_map	**map;
+	int		i;
 
-	meta->map = malloc(sizeof(t_map *) * meta->ysize_map);
-	if (meta->map == NULL)
+	map = malloc(sizeof(t_map *) * ysize);
+	if (map == NULL)
 		return (NULL);
 	i = 0;
-	while (i < meta->ysize_map)
+	while (i < ysize)
 	{
-		meta->map[i] = malloc(sizeof(t_map) * meta->xsize_map);
-		if (meta->map[i] == NULL)
+		map[i] = malloc(sizeof(t_map) * xsize);
+		if (map[i] == NULL)
 		{
 			while (i)
-				free(meta->map[i--]);
-			free (meta->map);
+				free(map[i--]);
+			free (map);
 			return (NULL);
 		}
 		i++;
 	}
-	return (meta->map);
+	return (map);
 }
 
-int	ft_make_mapbase(char *filename, t_meta *meta)
+int	fdf_make_empty_map(char *filename, t_meta *meta)
 {
 	int		fd;
 	char	*line_first;
@@ -122,7 +123,7 @@ int	ft_make_mapbase(char *filename, t_meta *meta)
 	free (line_first);
 	if (meta->xsize_map == 0)
 		return (ft_mes_error("No data or Data start from newline\n"));
-	meta->map = ft_allocate_map(meta);
+	meta->map = ft_allocate_map(meta->xsize_map, meta->ysize_map);
 	if (meta->map == NULL)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

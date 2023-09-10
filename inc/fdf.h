@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:00:32 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/26 17:21:18 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:56:35 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ char			**ft_split_multichar(const char *s, const char *multichar);
 int				ft_atoi(const char *src);
 void			ft_bzero(void *s, size_t n);
 char			*ft_atoi_base(char *str, char *base, char *baseto);
-//ft_get_map
-t_map			**ft_get_map(char *filename, t_meta *meta);
-//ft_get_map2
-t_map			**ft_allocate_map(t_meta *meta);
-int				ft_make_mapbase(char *filename, t_meta *meta);
+//fdf_get_map
+t_map			**fdf_get_map(char *filename, t_meta *meta);
+//fdf_get_map2
+t_map			**ft_allocate_map(int xsize, int ysize);
+int				fdf_make_empty_map(char *filename, t_meta *meta);
 //ft_free_allocate
 int				ft_free_sprit(char **matrix);
 int				ft_free_map(t_map **map, const int y);
@@ -98,8 +98,8 @@ double			ft_hypotenus_of_pytgrs(double a, double b);
 double			ft_leg_of_rest(double hypotenus, double leg);
 double			ft_expand_interval(double window_max, double xsize);
 //ft_map_initi_locate
-void			ft_conv_data(t_meta *meta, t_meta *meta_c, int ix, int iy);
-t_meta			*ft_initi_locate_obj(t_meta *meta, t_meta *meta_conv);
+void			ft_conv_data(t_meta *meta, int ix, int iy);
+t_meta			*fdf_init_locate_obj(t_meta *meta);
 //ft_map_relocate
 void			ft_mlx_image_clear(t_meta *meta);
 void			ft_resize(t_meta *meta, int ix, int iy, double scale);
