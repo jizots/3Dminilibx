@@ -1,8 +1,8 @@
 NAME = fdf
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-CFLAGS += -I /usr/local/include
-CFLAGS += -I/path/to/minilibx_macos
+CFLAGS += -I ./inc
+CFLAGS += -I/path/to/minilibx_macos -I/path/to/liborft
 COPTIONS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 SRCS = main.c\
 	ft_get_map.c\
@@ -18,7 +18,10 @@ SRCS = main.c\
 	ft_color_get.c\
 	ft_color_gradation.c\
 
-OBJS = $(SRCS:%.c=%.o)
+SRCS_DIR = src/
+OBJS_DIR = objs/
+
+OBJS = ${addprefix ${OBJS_DIR}, ${SRCS:%.c=%.o}}
 
 LIBORFT_DIR = liborft
 LIBORFT_MAKEFILE = $(LIBORFT_DIR)/Makefile
@@ -30,7 +33,13 @@ MLX_STATIC = $(MLX_DIR)/libmlx.a
 
 .PHONY: all bonus clean fclean re
 
-all: $(NAME)
+all: ${OBJS_DIR} ${NAME}
+
+${OBJS_DIR}:
+	mkdir -p ${OBJS_DIR}
+
+${OBJS_DIR}%.o: ${SRCS_DIR}%.c | ${OBJS_DIR}
+	${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBORFT_STATIC) $(MLX_STATIC)
 	$(CC) $(CFLAGS1) $(CFLAGS2) -o $(NAME) $(OBJS) -L$(LIBORFT_DIR) -lorft -L$(MLX_DIR) -lmlx $(COPTIONS)
@@ -41,10 +50,14 @@ $(LIBORFT_STATIC):
 $(MLX_STATIC):
 	$(MAKE) -C $(MLX_DIR)
 
+bonus:
+	${MAKE} WITH_BONUS=1 all
+
 clean:
 	$(MAKE) -C $(LIBORFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
 	rm -f $(OBJS)
+	rmdir ${OBJS_DIR} 2>/dev/null || true
 
 fclean: clean
 	$(MAKE) -C $(LIBORFT_DIR) fclean
