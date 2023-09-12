@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 13:20:09 by hotph             #+#    #+#             */
-/*   Updated: 2023/09/10 14:55:06 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:20:55 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_conv_data(t_meta *meta, int ix, int iy)
 {
 	double	total_interval;
+	int		index;
 
 	while (iy < meta->ysize_map)
 	{
@@ -24,15 +25,16 @@ void	ft_conv_data(t_meta *meta, int ix, int iy)
 		ix = 0;
 		while (ix < meta->xsize_map)
 		{
-			meta->map[iy][ix].x
+			index = (iy * meta->xsize_map) + ix;
+			meta->map[index].x
 				= (double)meta->x_org + (ix * meta->interval);
-			meta->map[iy][ix].z = (double)(meta->map[iy][ix].z
+			meta->map[index].z = (double)(meta->map[index].z
 					* ((meta->interval / sqrt(3)) * 2));
-			meta->map[iy][ix].y = (double)meta->y_org
-				- ((meta->interval * ix) / sqrt(3)) - meta->map[iy][ix].z;
-			meta->map[iy][ix].color = meta->map[iy][ix].color;
-			if (ft_inside_win(meta, &(meta->map[iy][ix])) != 0)
-				meta->map[iy][ix].flag_outwin = 1;
+			meta->map[index].y = (double)meta->y_org
+				- ((meta->interval * ix) / sqrt(3)) - meta->map[index].z;
+			meta->map[index].color = meta->map[index].color;
+			if (ft_inside_win(meta, &(meta->map[index])) != 0)
+				meta->map[index].flag_outwin = 1;
 			ix++;
 		}
 		iy++;

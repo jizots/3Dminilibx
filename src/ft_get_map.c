@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static int	ft_str_conv_data(char *str, t_map **map, int ix, int iy)
+static int	ft_str_conv_data(char *str, t_meta *meta, int ix, int iy)
 {
 	char		*tmp;
 	uint32_t	color;
@@ -34,10 +34,7 @@ static int	ft_str_conv_data(char *str, t_map **map, int ix, int iy)
 		else
 			i++;
 	}
-	map[iy][ix].x = (double)ix;
-	map[iy][ix].y = (double)iy;
-	map[iy][ix].z = (double)ft_atoi(str);
-	map[iy][ix].color = color;
+	meta->map[(iy * meta->xsize_map) + ix] = (t_map){(double)ix, (double)iy, (double)ft_atoi(str), color, 0};
 	return (EXIT_SUCCESS);
 }
 
@@ -48,7 +45,7 @@ static int	ft_line_convert_data(char *line, t_meta *meta, const int y)
 
 	matrix = ft_split_multichar(line, " \n");
 	if (matrix == NULL)
-		return (ft_free_map(meta->map, y));
+		return (EXIT_FAILURE);
 	ix = 0;
 	while (matrix[ix] != NULL)
 		ix++;
@@ -60,9 +57,8 @@ static int	ft_line_convert_data(char *line, t_meta *meta, const int y)
 	ix = 0;
 	while (matrix[ix] != NULL)
 	{
-		if (ft_str_conv_data(matrix[ix], meta->map, ix, y) != EXIT_SUCCESS)
+		if (ft_str_conv_data(matrix[ix], meta, ix, y) != EXIT_SUCCESS)
 			return (ft_free_sprit(matrix));
-		meta->map[y][ix].flag_outwin = 0;
 		ix++;
 	}
 	ft_free_sprit(matrix);
@@ -82,22 +78,16 @@ static int	ft_get_line(int fd, t_meta *meta)
 			break ;
 		if (ft_line_convert_data(line, meta, (const int) iy)
 			!= EXIT_SUCCESS)
-		{
-			ft_free_map(meta->map, meta->ysize_map);
 			return (EXIT_FAILURE);
-		}
 		free(line);
 		iy++;
 	}
 	if (iy != meta->ysize_map)
-	{
-		ft_free_map(meta->map, meta->ysize_map);
 		return (ft_mes_error("Wrong line existing.\n"));
-	}
 	return (EXIT_SUCCESS);
 }
 
-t_map	**fdf_get_map(char *filename, t_meta *meta)
+t_map	*fdf_get_map(char *filename, t_meta *meta)
 {
 	int		fd;
 
@@ -109,8 +99,11 @@ t_map	**fdf_get_map(char *filename, t_meta *meta)
 		ft_print_perror("open :");
 		return (NULL);
 	}
-	if (ft_get_line(fd, meta) == EXIT_FAILURE)
+	if (ft_get_line(fd, meta) != 0)
+	{
+		free(meta->map);
 		return (NULL);
+	}
 	close (fd);
 	return (meta->map);
 }

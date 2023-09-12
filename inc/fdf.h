@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:00:32 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/10 14:56:35 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:30:12 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_meta
 	double	interval;
 	int		x_org;
 	int		y_org;
-	t_map	**map;
+	t_map	*map;
 	t_mlx	*img;
 }	t_meta;
 
@@ -83,13 +83,12 @@ int				ft_atoi(const char *src);
 void			ft_bzero(void *s, size_t n);
 char			*ft_atoi_base(char *str, char *base, char *baseto);
 //fdf_get_map
-t_map			**fdf_get_map(char *filename, t_meta *meta);
+t_map			*fdf_get_map(char *filename, t_meta *meta);
 //fdf_get_map2
-t_map			**ft_allocate_map(int xsize, int ysize);
+t_map			*ft_allocate_map(int xsize, int ysize);
 int				fdf_make_empty_map(char *filename, t_meta *meta);
 //ft_free_allocate
 int				ft_free_sprit(char **matrix);
-int				ft_free_map(t_map **map, const int y);
 //ft_print_error
 int				ft_print_perror(char *original_message);
 int				ft_mes_error(char *message);

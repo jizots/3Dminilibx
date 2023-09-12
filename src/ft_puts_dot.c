@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:35:01 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/26 17:54:21 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:20:56 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_puts_line_yaxis(t_meta *meta, t_mlx *img)
 	int	x;
 	int	y;
 	int	flag;
+	int	index;
 
 	y = 0;
 	while (y < meta->ysize_map - 1)
@@ -48,14 +49,15 @@ void	ft_puts_line_yaxis(t_meta *meta, t_mlx *img)
 		x = 0;
 		while (x < meta->xsize_map)
 		{
+			index = (y * meta->xsize_map) + x;
 			flag = ft_which_is_inside
-				(&(meta->map[y][x]), &(meta->map[y + 1][x]));
+				(&(meta->map[index]), &(meta->map[(index + meta->xsize_map)]));
 			if (flag <= 1)
 				ft_puts_line
-					(meta, &(meta->map[y][x]), &(meta->map[y + 1][x]), img);
+					(meta, &(meta->map[index]), &(meta->map[(index + meta->xsize_map)]), img);
 			else if (flag == 2)
 				ft_puts_line
-					(meta, &(meta->map[y + 1][x]), &(meta->map[y][x]), img);
+					(meta, &(meta->map[(index + meta->xsize_map)]), &(meta->map[index]), img);
 			x++;
 		}
 		y++;
@@ -67,6 +69,7 @@ int	ft_puts_all_line(t_meta *meta, t_mlx *img)
 	int	x;
 	int	y;
 	int	flag;
+	int	index;
 
 	y = 0;
 	while (y < meta->ysize_map)
@@ -74,14 +77,15 @@ int	ft_puts_all_line(t_meta *meta, t_mlx *img)
 		x = 0;
 		while (x < meta->xsize_map - 1)
 		{
+			index = (y * meta->xsize_map) + x;
 			flag = ft_which_is_inside
-				(&(meta->map[y][x]), &(meta->map[y][x + 1]));
+				(&(meta->map[index]), &(meta->map[index + 1]));
 			if (flag <= 1)
 				ft_puts_line
-					(meta, &(meta->map[y][x]), &(meta->map[y][x + 1]), img);
+					(meta, &(meta->map[index]), &(meta->map[index + 1]), img);
 			else if (flag == 2)
 				ft_puts_line
-					(meta, &(meta->map[y][x + 1]), &(meta->map[y][x]), img);
+					(meta, &(meta->map[index + 1]), &(meta->map[index]), img);
 			x++;
 		}
 		y++;
