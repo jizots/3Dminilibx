@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:42:02 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/10 14:55:52 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:25:39 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int	main(int ac, char **av)
 		{
 			fdf_init_locate_obj(&meta);
 			ft_mlx_make_win(&meta, &img);
-			ft_free_map(meta.map, meta.ysize_map);
+			free(meta.map);
 		}
 	}
 	return (0);
 }
 
-// __attribute__((destructor))
-// static void	destructor(void)
-// {
-// 	system("leaks -q fdf");
-// }
+__attribute__((destructor))
+static void	destructor(void)
+{
+	system("leaks -q fdf");
+}

@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:19:53 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/26 18:05:12 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:28:14 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_resize(t_meta *meta, int ix, int iy, double scale)
 {
 	double	total_interval;
+	int		index;
 
 	while (iy < meta->ysize_map)
 	{
@@ -24,17 +25,18 @@ void	ft_resize(t_meta *meta, int ix, int iy, double scale)
 		ix = 0;
 		while (ix < meta->xsize_map)
 		{
-			meta->map[iy][ix].x
+			index = (iy * meta->xsize_map) + ix;
+			meta->map[index].x
 				= meta->x_org + ((double)ix * meta->interval);
-			meta->map[iy][ix].z = (double)(meta->map[iy][ix].z * scale);
-			meta->map[iy][ix].y = meta->y_org
+			meta->map[index].z = (double)(meta->map[index].z * scale);
+			meta->map[index].y = meta->y_org
 				- ((meta->interval * (double)ix) / sqrt(3))
-				- meta->map[iy][ix].z;
-			meta->map[iy][ix].color = meta->map[iy][ix].color;
-			if (ft_inside_win(meta, &(meta->map[iy][ix])) != 0)
-				meta->map[iy][ix].flag_outwin = 1;
+				- meta->map[index].z;
+			meta->map[index].color = meta->map[index].color;
+			if (ft_inside_win(meta, &(meta->map[index])) != 0)
+				meta->map[index].flag_outwin = 1;
 			else
-				meta->map[iy][ix].flag_outwin = 0;
+				meta->map[index].flag_outwin = 0;
 			ix++;
 		}
 		iy++;

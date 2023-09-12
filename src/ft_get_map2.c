@@ -79,27 +79,13 @@ int	ft_count_line(int fd, char *filename)
 	return (count + 1);
 }
 
-t_map	**ft_allocate_map(int xsize, int ysize)
+t_map	*ft_allocate_map(int xsize, int ysize)
 {
-	t_map	**map;
-	int		i;
+	t_map	*map;
 
-	map = malloc(sizeof(t_map *) * ysize);
+	map = malloc(sizeof(t_map) * (ysize * xsize));
 	if (map == NULL)
 		return (NULL);
-	i = 0;
-	while (i < ysize)
-	{
-		map[i] = malloc(sizeof(t_map) * xsize);
-		if (map[i] == NULL)
-		{
-			while (i)
-				free(map[i--]);
-			free (map);
-			return (NULL);
-		}
-		i++;
-	}
 	return (map);
 }
 
