@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_get_map.c                                       :+:      :+:    :+:   */
+/*   ft_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:09:55 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/25 16:54:04 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:05:56 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static int	ft_str_conv_data(char *str, t_meta *meta, int ix, int iy)
 		else
 			i++;
 	}
-	meta->map[(iy * meta->xsize_map) + ix] = (t_map){(double)ix, (double)iy, (double)ft_atoi(str), color, 0};
+	meta->map[(iy * meta->xsize_map) + ix]
+		= (t_map3d){(double)ix, (double)iy, (double)ft_atoi(str), color, 0};
 	return (EXIT_SUCCESS);
 }
 
@@ -87,7 +88,7 @@ static int	ft_get_line(int fd, t_meta *meta)
 	return (EXIT_SUCCESS);
 }
 
-t_map	*fdf_get_map(char *filename, t_meta *meta)
+t_map3d	*fdf_get_map3d(char *filename, t_meta *meta)
 {
 	int		fd;
 

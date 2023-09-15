@@ -12,11 +12,15 @@ SRCS = main.c\
 	ft_map_initi_locate.c\
 	ft_map_relocate.c\
 	ft_length_utils.c\
-	ft_mlx_func.c\
+	mlx_hook.c\
 	ft_mlx_inside_win.c\
-	ft_puts_dot.c\
+	draw.c\
 	ft_color_get.c\
 	ft_color_gradation.c\
+	rotation_matrix_x.c\
+	rotation_matrix_y.c\
+	rotation_matrix_z.c\
+	move_to_udlr.c\
 
 SRCS_DIR = src/
 OBJS_DIR = objs/

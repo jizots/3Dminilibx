@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:42:02 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/12 18:25:39 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:11:05 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	else
 	{
 		init_sizeof_window(&meta, &img);
-		meta.map = fdf_get_map(av[1], &meta);
+		meta.map = fdf_get_map3d(av[1], &meta);
 		if (meta.map == NULL)
 			return (1);
 		if (meta.map != NULL)
@@ -42,8 +42,8 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-__attribute__((destructor))
-static void	destructor(void)
-{
-	system("leaks -q fdf");
-}
+// __attribute__((destructor))
+// static void	destructor(void)
+// {
+// 	system("leaks -q fdf");
+// }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puts_dot.c                                      :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 18:35:01 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/12 18:20:56 by sotanaka         ###   ########.fr       */
+/*   Created: 2023/09/15 13:24:16 by sotanaka          #+#    #+#             */
+/*   Updated: 2023/09/15 13:30:40 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	ft_puts_line(t_meta *meta, t_map *from, t_map *to, t_mlx *img)
+static int	ft_puts_line(t_meta *meta, t_map3d *from, t_map3d *to, t_mlx *img)
 {
 	t_puts	a;
 
@@ -50,21 +50,21 @@ void	ft_puts_line_yaxis(t_meta *meta, t_mlx *img)
 		while (x < meta->xsize_map)
 		{
 			index = (y * meta->xsize_map) + x;
-			flag = ft_which_is_inside
-				(&(meta->map[index]), &(meta->map[(index + meta->xsize_map)]));
+			flag = ft_which_is_inside(&(meta->map[index]),
+					&(meta->map[(index + meta->xsize_map)]));
 			if (flag <= 1)
-				ft_puts_line
-					(meta, &(meta->map[index]), &(meta->map[(index + meta->xsize_map)]), img);
+				ft_puts_line(meta, &(meta->map[index]),
+					&(meta->map[(index + meta->xsize_map)]), img);
 			else if (flag == 2)
-				ft_puts_line
-					(meta, &(meta->map[(index + meta->xsize_map)]), &(meta->map[index]), img);
+				ft_puts_line(meta, &(meta->map[(index + meta->xsize_map)]),
+					&(meta->map[index]), img);
 			x++;
 		}
 		y++;
 	}
 }
 
-int	ft_puts_all_line(t_meta *meta, t_mlx *img)
+static int	ft_puts_all_line(t_meta *meta, t_mlx *img)
 {
 	int	x;
 	int	y;
@@ -92,4 +92,13 @@ int	ft_puts_all_line(t_meta *meta, t_mlx *img)
 	}
 	ft_puts_line_yaxis(meta, img);
 	return (0);
+}
+
+void	ft_draw(t_meta *meta, t_mlx *img)
+{
+	ft_puts_all_line(meta, img);
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	mlx_hook(img->win, 2, 0, ft_mlx_keypush, meta);
+	mlx_hook(img->win, 17, 0, ft_mlx_close_win, img);
+	mlx_loop(img->mlx);
 }

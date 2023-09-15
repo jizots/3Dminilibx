@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:49:18 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/24 17:54:51 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:36:47 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char	*get_next_line(int fd)
 // 	char *line;
 // 	int fd;
 
-// 	fd = open("/Users/sotanaka/fdf-0/test_maps/pnp_flat.fdf", O_RDONLY);
+// 	fd = open("/Users/sotanaka/fdf-0/test_map3ds/pnp_flat.fdf", O_RDONLY);
 // 	while (1)
 // 	{
 // 		line = get_next_line(fd);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_get_map2.c                                      :+:      :+:    :+:   */
+/*   ft_get_map2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:11:15 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/07/26 13:23:28 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:05:44 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	ft_count_line(int fd, char *filename)
 	return (count + 1);
 }
 
-t_map	*ft_allocate_map(int xsize, int ysize)
+t_map3d	*ft_allocate_map(int xsize, int ysize)
 {
-	t_map	*map;
+	t_map3d	*map;
 
-	map = malloc(sizeof(t_map) * (ysize * xsize));
+	map = malloc(sizeof(t_map3d) * (ysize * xsize));
 	if (map == NULL)
 		return (NULL);
 	return (map);

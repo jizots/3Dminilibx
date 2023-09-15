@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 09:22:29 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/10 15:03:53 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:24:54 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,24 @@ int	ft_mlx_keypush(int keycode, void *param)
 	else if (keycode == KEY_PLUS)
 	{
 		meta->interval = meta->interval * 1.1111;
-		ft_resize(meta, 0, 0, 1.1);
-		ft_mlx_image_clear(meta);
-		ft_draw(meta, meta->img);
+		ft_resize(meta, 0, 0, 1.1111);
 	}
 	else if (keycode == KEY_MINUS)
 	{
 		meta->interval = meta->interval * 0.9;
 		ft_resize(meta, 0, 0, 0.9);
-		ft_mlx_image_clear(meta);
-		ft_draw(meta, meta->img);
 	}
+	else if (keycode == KEY_X)
+		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_x);
+	else if (keycode == KEY_Y)
+		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_y);
+	else if (keycode == KEY_Z)
+		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_z);
+	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_LEFT || keycode == KEY_RIGHT)
+		move_to_where(meta, keycode);
+	ft_mlx_image_clear(meta);
+	ft_draw(meta, meta->img);
 	return (0);
-}
-
-void	ft_draw(t_meta *meta, t_mlx *img)
-{
-	ft_puts_all_line(meta, img);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-	mlx_hook(img->win, 2, 0, ft_mlx_keypush, meta);
-	mlx_hook(img->win, 17, 0, ft_mlx_close_win, img);
-	mlx_loop(img->mlx);
 }
 
 void	ft_mlx_make_win(t_meta *meta, t_mlx *img)

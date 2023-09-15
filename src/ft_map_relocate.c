@@ -6,11 +6,12 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:19:53 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/12 18:28:14 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:13:06 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "keycode.h"
 
 void	ft_resize(t_meta *meta, int ix, int iy, double scale)
 {
@@ -33,14 +34,45 @@ void	ft_resize(t_meta *meta, int ix, int iy, double scale)
 				- ((meta->interval * (double)ix) / sqrt(3))
 				- meta->map[index].z;
 			meta->map[index].color = meta->map[index].color;
-			if (ft_inside_win(meta, &(meta->map[index])) != 0)
-				meta->map[index].flag_outwin = 1;
-			else
-				meta->map[index].flag_outwin = 0;
+			ft_inside_win(meta, &(meta->map[index]));
 			ix++;
 		}
 		iy++;
 	}
+}
+
+void	rotation_matrix_what(t_meta *meta,
+	double radian, void (*f)(t_map3d *, double))
+{
+	int		ix;
+	int		iy;
+	int		index;
+
+	iy = 0;
+	while (iy < meta->ysize_map)
+	{
+		ix = 0;
+		while (ix < meta->xsize_map)
+		{
+			index = (iy * meta->xsize_map) + ix;
+			(f)(&(meta->map[index]), radian);
+			ft_inside_win(meta, &(meta->map[index]));
+			ix++;
+		}
+		iy++;
+	}
+}
+
+void	move_to_where(t_meta *meta, int keycode)
+{
+	if (keycode == KEY_UP)
+		move_y_to(meta, -3);
+	else if (keycode == KEY_DOWN)
+		move_y_to(meta, 3);
+	else if (keycode == KEY_LEFT)
+		move_x_to(meta, -3);
+	else if (keycode == KEY_RIGHT)
+		move_x_to(meta, 3);
 }
 
 void	ft_mlx_image_clear(t_meta *meta)

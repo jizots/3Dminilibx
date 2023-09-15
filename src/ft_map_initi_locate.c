@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 13:20:09 by hotph             #+#    #+#             */
-/*   Updated: 2023/09/12 17:20:55 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:12:17 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	ft_conv_data(t_meta *meta, int ix, int iy)
 			meta->map[index].y = (double)meta->y_org
 				- ((meta->interval * ix) / sqrt(3)) - meta->map[index].z;
 			meta->map[index].color = meta->map[index].color;
-			if (ft_inside_win(meta, &(meta->map[index])) != 0)
-				meta->map[index].flag_outwin = 1;
+			ft_inside_win(meta, &(meta->map[index]));
 			ix++;
 		}
 		iy++;
