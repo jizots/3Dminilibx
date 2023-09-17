@@ -7,20 +7,20 @@ COPTIONS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 SRCS = main.c\
 	ft_get_map.c\
 	ft_get_map2.c\
-	ft_print_error.c\
-	ft_free_allocate.c\
-	ft_map_initi_locate.c\
-	ft_map_relocate.c\
-	ft_length_utils.c\
-	mlx_hook.c\
-	ft_mlx_inside_win.c\
+	init_locate.c\
 	draw.c\
-	ft_color_get.c\
-	ft_color_gradation.c\
+	mlx_hook.c\
+	map_relocate.c\
+	move_to_udlr.c\
 	rotation_matrix_x.c\
 	rotation_matrix_y.c\
 	rotation_matrix_z.c\
-	move_to_udlr.c\
+	ft_length_utils.c\
+	is_inside_win.c\
+	ft_color_get.c\
+	ft_color_gradation.c\
+	free_allocate.c\
+	print_error.c\
 
 SRCS_DIR = src/
 OBJS_DIR = objs/

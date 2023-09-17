@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:28:53 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/15 12:09:34 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:02:58 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	convert_z_yaxis(t_map3d *map, double radian)
 
 void	culc_rotation_matrix_y(t_map3d *map, double radian)
 {
-	map->x -= 500;
+	map->x -= 500.0;
 	convert_x_yaxis(map, radian);
 	convert_z_yaxis(map, radian);
-	map->x += 500;
+	map->x += 500.0;
 }

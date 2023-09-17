@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mlx_func.c                                      :+:      :+:    :+:   */
+/*   mlx_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 09:22:29 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/15 13:24:54 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:50:14 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,10 @@ int	ft_mlx_keypush(int keycode, void *param)
 		meta->interval = meta->interval * 0.9;
 		ft_resize(meta, 0, 0, 0.9);
 	}
-	else if (keycode == KEY_X)
-		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_x);
-	else if (keycode == KEY_Y)
-		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_y);
-	else if (keycode == KEY_Z)
-		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_z);
-	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	else if (keycode == KEY_X || keycode == KEY_Y || keycode == KEY_Z)
+		rotate_to_where(keycode, param);
+	else if (keycode == KEY_UP || keycode == KEY_DOWN
+		|| keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		move_to_where(meta, keycode);
 	ft_mlx_image_clear(meta);
 	ft_draw(meta, meta->img);

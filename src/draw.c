@@ -6,7 +6,7 @@
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:24:16 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/15 13:30:40 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:41:06 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	ft_puts_all_line(t_meta *meta, t_mlx *img)
 		x = 0;
 		while (x < meta->xsize_map - 1)
 		{
-			index = (y * meta->xsize_map) + x;
+			index = (y * meta->xsize_map) + x++;
 			flag = ft_which_is_inside
 				(&(meta->map[index]), &(meta->map[index + 1]));
 			if (flag <= 1)
@@ -86,7 +86,6 @@ static int	ft_puts_all_line(t_meta *meta, t_mlx *img)
 			else if (flag == 2)
 				ft_puts_line
 					(meta, &(meta->map[index + 1]), &(meta->map[index]), img);
-			x++;
 		}
 		y++;
 	}

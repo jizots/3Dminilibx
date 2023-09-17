@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_relocate.c                                  :+:      :+:    :+:   */
+/*   map_relocate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sotanaka <sotanaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:19:53 by sotanaka          #+#    #+#             */
-/*   Updated: 2023/09/15 13:13:06 by sotanaka         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:47:37 by sotanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ void	rotation_matrix_what(t_meta *meta,
 		}
 		iy++;
 	}
+}
+
+void	rotate_to_where(int keycode, void *param)
+{
+	t_meta	*meta;
+
+	meta = param;
+	if (keycode == KEY_X)
+		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_x);
+	else if (keycode == KEY_Y)
+		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_y);
+	else if (keycode == KEY_Z)
+		rotation_matrix_what(meta, ft_radian(2), culc_rotation_matrix_z);
 }
 
 void	move_to_where(t_meta *meta, int keycode)
